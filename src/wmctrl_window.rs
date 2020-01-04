@@ -1,8 +1,7 @@
-use std::fmt;
-use std::process::Command;
 use cmd_lib::{Process, CmdResult};
 
-#[derive(Debug)]
+
+#[derive(Debug, Eq, Ord, PartialEq, PartialOrd)] // Todo: check `derive`
 pub struct WmctrlWindow {
     pub id: String,
     pub name: String,
@@ -14,6 +13,7 @@ pub struct WmctrlWindow {
 }
 
 impl WmctrlWindow {
+    /*
     pub fn new() -> WmctrlWindow {
         WmctrlWindow {
             id: "as".to_string(),
@@ -25,6 +25,7 @@ impl WmctrlWindow {
             height: 13,
         }
     }
+    */
 
     pub fn from_string(line: String) -> Result<WmctrlWindow, ()> {
         
@@ -63,25 +64,19 @@ impl WmctrlWindow {
         let change_position_comand = ["wmctrl -i -r ", self.id.as_str(), " -e ", position.as_str()].join("");
         let unmaximize_command = ["wmctrl -ir ", self.id.as_str(), " -b remove,maximized_vert,maximized_horz"].join("");
 
-        Process::new(change_position_comand).wait::<CmdResult>();//.unwrap();
-        Process::new(unmaximize_command).wait::<CmdResult>();//.unwrap();
 
-    /*
-        let mut command = Command::new("wmctrl");
-        command.arg("-vvv");
-        
-        command.arg(
-            ["-r", self.id.as_str()].join(" ")
-        );
-        
-        command.arg(
-            ["-e", position.as_str()].join(" ")
-        );
-        
-        let output = command.output().unwrap();
-    */  
+        // Rust complained about unused code
+        // And the CmdLib's documentation
+        // doesn't help with this `.wait` thing
+        // TODO: Find out more (this works perfectly though)
+        match Process::new(change_position_comand).wait::<CmdResult>() {
+            _ => {}
+        };
 
-        // run_cmd!("wmctrl hello, {}", name)?;
+        match Process::new(unmaximize_command).wait::<CmdResult>() {
+            _ => {}
+        };
+        
     }
 }
 
