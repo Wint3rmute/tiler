@@ -19,6 +19,7 @@ Tiler will automatically align all windows in your workspace.
 ## What works
 
 Tldr; just watch this
+
 ![demo gif](./demo.gif)
 
 Currently there are layouts for:
