@@ -18,6 +18,9 @@ Tiler will automatically align all windows in your workspace.
 
 ## What works
 
+Tldr; just watch this
+![demo gif](./demo.gif)
+
 Currently there are layouts for:
 
 * 1 window - aligns the window to the center, switches between small and big window size
