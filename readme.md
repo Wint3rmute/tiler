@@ -16,6 +16,14 @@ Tiler will automatically align all windows in your workspace.
 `tiler big` - bigger windows, smaller gaps
 
 
+## What works
+
+Currently there are layouts for:
+
+* 1 window - aligns the window to the center, switches between small and big window size
+* 2 windows - side-by-side, windows are swapped each time you activate Tiler, use `big` option to get bigger windows
+* 3 windows - One big window on the left, 2 smaller windows on the right, moves windows CCW on activation
+
 ## Installation
 * Clone the repo
 * `cargo build --release`
