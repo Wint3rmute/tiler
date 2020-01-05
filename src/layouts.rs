@@ -1,6 +1,7 @@
 use crate::{wp, hp};
 use crate::wmctrl_window;
 use std::mem::swap;
+use crate::size_settings::SizeSettings;
 
 
 // Extra positioning helpers
@@ -43,7 +44,7 @@ pub fn layout_1_window(window: &mut wmctrl_window::WmctrlWindow) {
     }
 }
 
-pub fn layout_2_windows(windows: &mut Vec<wmctrl_window::WmctrlWindow>) {
+pub fn layout_2_windows(windows: &mut Vec<wmctrl_window::WmctrlWindow>, settings: SizeSettings) {
     
     let mut window_left = windows.pop().unwrap();
     let mut window_right = windows.pop().unwrap();
@@ -53,8 +54,13 @@ pub fn layout_2_windows(windows: &mut Vec<wmctrl_window::WmctrlWindow>) {
     }
 
 
-    let width_perc = 0.42;
-    let height_perc = 0.60;
+
+    let (width_perc, height_perc) = match settings {
+        SizeSettings::Small => { (0.42, 0.60) }
+        _                   => { (0.455, 0.90) }
+    };
+    
+
 
     window_left.set_center_vertically(height_perc);
     window_right.set_center_vertically(height_perc);
@@ -97,9 +103,9 @@ pub fn layout_3_windows(windows: &mut Vec<wmctrl_window::WmctrlWindow>) {
     swap(&mut left_window, &mut bottom_window);
     swap(&mut left_window, &mut top_window);
 
+
     // LEFT WINDOW
 
-    
     left_window.left = wp!(margin_horizontal_perc);
     left_window.width = wp!(0.5 - margin_horizontal_perc * 1.5);
 
@@ -123,8 +129,6 @@ pub fn layout_3_windows(windows: &mut Vec<wmctrl_window::WmctrlWindow>) {
 
     bottom_window.top = hp!(0.5 + margin_vertical_perc * 0.5);
     bottom_window.height = hp!(0.5 - margin_vertical_perc * 1.5);
-
-
 
 
     left_window.apply_position();
