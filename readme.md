@@ -5,7 +5,7 @@ Zentile just wasn't right for me (it stays on as a background process all the ti
 makes you move your tiling-dedicated keyboard shortcuts into a separate file).
 
 Tiler is a "one-shot" script type - you bind it into a keyboard shortcut,
-then activate it when you want to align your windows.
+then run it when you want to align your windows.
 
 ## Usage
 
@@ -16,17 +16,19 @@ Tiler will automatically align all windows in your workspace.
 `tiler big` - bigger windows, smaller gaps
 
 
-## What works
+## How it works
 
-Tldr; just watch this
+Tldr; just watch this:
 
 ![demo gif](./demo.gif)
+
+In the video, *mod+space* runs `tiler`, *mod+shift+space* runs `tiler big`. 
 
 Currently there are layouts for:
 
 * 1 window - aligns the window to the center, switches between small and big window size
 * 2 windows - side-by-side, windows are swapped each time you activate Tiler, use `big` option to get bigger windows
-* 3 windows - One big window on the left, 2 smaller windows on the right, moves windows CCW on activation
+* 3 windows - One big window on the left, 2 smaller windows on the right, cycles the windows CCW on activation, so you can decide where you want each window to be. 
 
 ## Installation
 * Clone the repo
