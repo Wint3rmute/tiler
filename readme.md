@@ -13,7 +13,7 @@ Tiler will automatically align all windows in your workspace.
 
 `tiler` - standard settings
 
-`tiler big` - bigger windows, smaller gaps
+`tiler small` - bigger gaps, smaller windows (*a e s t h e t i c*)
 
 
 ## What works
