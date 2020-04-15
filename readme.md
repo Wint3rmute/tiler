@@ -18,6 +18,10 @@ Tiler will automatically align all windows in your workspace.
 
 ## What works
 
+Tldr; just watch this
+
+![demo gif](./demo.gif)
+
 Currently there are layouts for:
 
 * 1 window - aligns the window to the center, switches between small and big window size
@@ -27,5 +31,5 @@ Currently there are layouts for:
 ## Installation
 * Clone the repo
 * `cargo build --release`
-* Copy the result binary from `target/release/tiler` into some convenient place
+* Copy the resulting binary from `target/release/tiler` into some convenient place
 * Bind the binary execution to your keyboard shortcut of choice
