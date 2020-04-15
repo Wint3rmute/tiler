@@ -56,7 +56,7 @@ pub fn layout_2_windows(windows: &mut Vec<wmctrl_window::WmctrlWindow>, settings
 
 
     let (width_perc, height_perc) = match settings {
-        SizeSettings::Small => { (0.42, 0.60) }
+        SizeSettings::BigGaps => { (0.42, 0.60) }
         _                   => { (0.455, 0.90) }
     };
     
@@ -77,7 +77,7 @@ pub fn layout_2_windows(windows: &mut Vec<wmctrl_window::WmctrlWindow>, settings
     window_right.apply_position(); 
 }
 
-pub fn layout_3_windows(windows: &mut Vec<wmctrl_window::WmctrlWindow>) {
+pub fn layout_3_windows(windows: &mut Vec<wmctrl_window::WmctrlWindow>, settings: SizeSettings) {
 
     windows.sort_by(|a, b| b.left.cmp(&a.left));
 
@@ -94,10 +94,16 @@ pub fn layout_3_windows(windows: &mut Vec<wmctrl_window::WmctrlWindow>) {
 
     // CONFIG
 
+    /*
     let margin_horizontal_perc = 0.02;
     let margin_vertical_perc = 0.032;
+    */
 
-
+    let (margin_horizontal_perc, margin_vertical_perc) = match settings {
+        SizeSettings::SmallGaps => { (0.02, 0.032) }
+        _                   => { (0.06, 0.096) }
+    };
+    
     // WINDOW CYCLING
 
     swap(&mut left_window, &mut bottom_window);

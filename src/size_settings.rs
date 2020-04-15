@@ -1,21 +1,18 @@
 use std::env::args;
 
 pub enum SizeSettings {
-    Big,
-    Small,
+    BigGaps,
+    SmallGaps,
 }
 
 pub fn get_size_settings() -> SizeSettings {
-    // for arg in args() {
-    // println!("{}", arg);
-    // }
 
-    let mut result = SizeSettings::Small;
+    let mut result = SizeSettings::BigGaps;
 
     match args().nth(1) {
         Some(value) => {
-            if value == "big" {
-                result = SizeSettings::Big;
+            if value == "small" {
+                result = SizeSettings::SmallGaps;
             }
         },
 

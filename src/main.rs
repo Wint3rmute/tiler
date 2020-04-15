@@ -14,7 +14,7 @@ fn main() {
     match num_of_windows {
         1 => layout_1_window(&mut windows[0]),
         2 => layout_2_windows(&mut windows, settings),
-        3 => layout_3_windows(&mut windows),
+        3 => layout_3_windows(&mut windows, settings),
         _ => {}
     };
 
