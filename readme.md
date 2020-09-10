@@ -32,7 +32,7 @@ Currently there are layouts for:
 
 ### AUR
 
-[tiler-bin package](https://aur.archlinux.org/packages/tiler-bin/)
+[tiler-bin](https://aur.archlinux.org/packages/tiler-bin/) AUR package
 
 ### Manual
 
