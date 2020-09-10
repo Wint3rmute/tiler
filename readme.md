@@ -11,7 +11,7 @@ then activate it when you want to align your windows.
 
 Tiler will automatically align all windows in your workspace.
 
-`tiler` - standard settings (*a e s t h e t i c*)
+`tiler` - standard settings ( *a e s t h e t i c* )
 
 `tiler small` - smaller gaps, bigger windows, practical
 
