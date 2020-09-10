@@ -29,6 +29,13 @@ Currently there are layouts for:
 * 3 windows - One big window on the left, 2 smaller windows on the right, moves windows CCW on activation
 
 ## Installation
+
+### AUR
+
+[tiler-bin package](https://aur.archlinux.org/packages/tiler-bin/)
+
+### Manual
+
 * Clone the repo
 * `cargo build --release`
 * Copy the resulting binary from `target/release/tiler` into some convenient place
