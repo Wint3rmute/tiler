@@ -20,5 +20,5 @@ pub fn get_size_settings() -> SizeSettings {
     };
     
 
-    result
+    return result;
 }
