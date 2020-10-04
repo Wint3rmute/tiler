@@ -11,9 +11,9 @@ then activate it when you want to align your windows.
 
 Tiler will automatically align all windows in your workspace.
 
-`tiler` - standard settings
+`tiler` - standard settings ( *a e s t h e t i c* )
 
-`tiler big` - bigger windows, smaller gaps
+`tiler small` - smaller gaps, bigger windows, practical
 
 
 ## What works
@@ -29,6 +29,13 @@ Currently there are layouts for:
 * 3 windows - One big window on the left, 2 smaller windows on the right, moves windows CCW on activation
 
 ## Installation
+
+### AUR
+
+[tiler-bin](https://aur.archlinux.org/packages/tiler-bin/) AUR package
+
+### Manual
+
 * Clone the repo
 * `cargo build --release`
 * Copy the resulting binary from `target/release/tiler` into some convenient place
