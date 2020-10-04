@@ -6,7 +6,6 @@ pub enum SizeSettings {
 }
 
 pub fn get_size_settings() -> SizeSettings {
-
     let mut result = SizeSettings::BigGaps;
 
     match args().nth(1) {
@@ -14,11 +13,10 @@ pub fn get_size_settings() -> SizeSettings {
             if value == "small" {
                 result = SizeSettings::SmallGaps;
             }
-        },
+        }
 
         _ => {}
     };
-    
 
     result
 }

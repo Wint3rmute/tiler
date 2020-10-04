@@ -1,5 +1,5 @@
-use std::process::Command;
 use crate::wmctrl_window;
+use std::process::Command;
 
 pub fn raw_get_current_workspace() -> i8 {
     let mut wmctrl_command = Command::new("wmctrl");
@@ -10,8 +10,9 @@ pub fn raw_get_current_workspace() -> i8 {
 
     let mut counter = 0;
     for line in output_str.lines() {
-        if line.contains("*")
-            { break; }
+        if line.contains("*") {
+            break;
+        }
 
         counter += 1;
     }
@@ -25,8 +26,6 @@ pub fn raw_get_windows_list() -> String {
     let output = wmctrl_command.output().unwrap();
     String::from_utf8(output.stdout).unwrap()
 }
-
-
 
 pub fn get_windows_on_current_workspace() -> Vec<wmctrl_window::WmctrlWindow> {
     let current_workspace = raw_get_current_workspace();
@@ -50,5 +49,3 @@ pub fn get_windows_on_current_workspace() -> Vec<wmctrl_window::WmctrlWindow> {
 
     result
 }
-
-

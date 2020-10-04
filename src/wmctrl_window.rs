@@ -1,5 +1,4 @@
-use cmd_lib::{Process, CmdResult};
-
+use cmd_lib::{CmdResult, Process};
 
 #[derive(Debug, Eq, Ord, PartialEq, PartialOrd)] // Todo: check `derive`
 pub struct WmctrlWindow {
@@ -28,42 +27,52 @@ impl WmctrlWindow {
     */
 
     pub fn from_string(line: String) -> Result<WmctrlWindow, ()> {
-        
-        let mut iterator =  line.split_whitespace();
+        let mut iterator = line.split_whitespace();
 
         let id = iterator.next().unwrap().to_string();
-        let desktop_num =  iterator.next().unwrap().parse::<i8>().unwrap();
+        let desktop_num = iterator.next().unwrap().parse::<i8>().unwrap();
 
         if desktop_num == -1 {
             return Err(());
         }
 
-        let left =  iterator.next().unwrap().parse::<i16>().unwrap();
-        let top =  iterator.next().unwrap().parse::<i16>().unwrap();
-        let width =  iterator.next().unwrap().parse::<i16>().unwrap();
-        let height =  iterator.next().unwrap().parse::<i16>().unwrap();
+        let left = iterator.next().unwrap().parse::<i16>().unwrap();
+        let top = iterator.next().unwrap().parse::<i16>().unwrap();
+        let width = iterator.next().unwrap().parse::<i16>().unwrap();
+        let height = iterator.next().unwrap().parse::<i16>().unwrap();
 
         iterator.next(); // Skip the hostname
 
         let name = iterator.collect::<Vec<&str>>().join(" ");
 
-        Ok(WmctrlWindow{
+        Ok(WmctrlWindow {
             id,
             name,
             desktop_num,
             top,
             left,
             width,
-            height
+            height,
         })
     }
 
     pub fn apply_position(&self) {
-
-        let position = [String::from("0"), self.left.to_string(),  self.top.to_string(), self.width.to_string(), self.height.to_string()].join(",");       
-        let change_position_comand = ["wmctrl -i -r ", self.id.as_str(), " -e ", position.as_str()].join("");
-        let unmaximize_command = ["wmctrl -ir ", self.id.as_str(), " -b remove,maximized_vert,maximized_horz"].join("");
-
+        let position = [
+            String::from("0"),
+            self.left.to_string(),
+            self.top.to_string(),
+            self.width.to_string(),
+            self.height.to_string(),
+        ]
+        .join(",");
+        let change_position_comand =
+            ["wmctrl -i -r ", self.id.as_str(), " -e ", position.as_str()].join("");
+        let unmaximize_command = [
+            "wmctrl -ir ",
+            self.id.as_str(),
+            " -b remove,maximized_vert,maximized_horz",
+        ]
+        .join("");
 
         // Rust complained about unused code
         // And the CmdLib's documentation
@@ -76,10 +85,8 @@ impl WmctrlWindow {
         match Process::new(unmaximize_command).wait::<CmdResult>() {
             _ => {}
         };
-        
     }
 }
-
 
 #[cfg(test)]
 mod tests {
@@ -99,7 +106,10 @@ mod tests {
 
         assert_eq!(window.height, 1055);
         assert_eq!(window.desktop_num, 0);
-        assert_eq!(window.name, "Unit testing - Rust By Example - Mozilla Firefox");
+        assert_eq!(
+            window.name,
+            "Unit testing - Rust By Example - Mozilla Firefox"
+        );
 
         //  assert_eq!(add(1, 2), 3);
     }
@@ -110,7 +120,6 @@ mod tests {
         let line = "0x00800004 -1 1884 6    30   67         N/A tint2".to_string();
 
         let window = WmctrlWindow::from_string(line).unwrap();
-
     }
 
     // #[test]

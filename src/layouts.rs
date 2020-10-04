@@ -1,12 +1,10 @@
-use crate::{wp, hp};
-use crate::wmctrl_window;
-use std::mem::swap;
 use crate::size_settings::SizeSettings;
-
+use crate::wmctrl_window;
+use crate::{hp, wp};
+use std::mem::swap;
 
 // Extra positioning helpers
 impl wmctrl_window::WmctrlWindow {
-
     // Maybe use it for some size-specific rules some day?
     /*
     fn get_field(&self) -> i32 {
@@ -45,7 +43,6 @@ pub fn layout_1_window(window: &mut wmctrl_window::WmctrlWindow) {
 }
 
 pub fn layout_2_windows(windows: &mut Vec<wmctrl_window::WmctrlWindow>, settings: SizeSettings) {
-    
     let mut window_left = windows.pop().unwrap();
     let mut window_right = windows.pop().unwrap();
 
@@ -53,19 +50,15 @@ pub fn layout_2_windows(windows: &mut Vec<wmctrl_window::WmctrlWindow>, settings
         swap(&mut window_left, &mut window_right);
     }
 
-
-
     let (width_perc, height_perc) = match settings {
-        SizeSettings::BigGaps => { (0.42, 0.60) }
-        _                   => { (0.455, 0.90) }
+        SizeSettings::BigGaps => (0.42, 0.60),
+        _ => (0.455, 0.90),
     };
-    
-
 
     window_left.set_center_vertically(height_perc);
     window_right.set_center_vertically(height_perc);
 
-    let left_margin = (1.0 - width_perc*2.0)/3.0;
+    let left_margin = (1.0 - width_perc * 2.0) / 3.0;
 
     window_left.left = wp!(left_margin);
     window_right.left = wp!(left_margin * 2.0 + width_perc);
@@ -74,11 +67,10 @@ pub fn layout_2_windows(windows: &mut Vec<wmctrl_window::WmctrlWindow>, settings
     window_right.width = wp!(width_perc);
 
     window_left.apply_position();
-    window_right.apply_position(); 
+    window_right.apply_position();
 }
 
 pub fn layout_3_windows(windows: &mut Vec<wmctrl_window::WmctrlWindow>, settings: SizeSettings) {
-
     windows.sort_by(|a, b| b.left.cmp(&a.left));
 
     let mut left_window = windows.pop().unwrap();
@@ -100,15 +92,13 @@ pub fn layout_3_windows(windows: &mut Vec<wmctrl_window::WmctrlWindow>, settings
     */
 
     let (margin_horizontal_perc, margin_vertical_perc) = match settings {
-        SizeSettings::SmallGaps => { (0.02, 0.032) }
-        _                   => { (0.06, 0.096) }
+        SizeSettings::SmallGaps => (0.02, 0.032),
+        _ => (0.06, 0.096),
     };
-    
     // WINDOW CYCLING
 
     swap(&mut left_window, &mut bottom_window);
     swap(&mut left_window, &mut top_window);
-
 
     // LEFT WINDOW
 
@@ -118,7 +108,6 @@ pub fn layout_3_windows(windows: &mut Vec<wmctrl_window::WmctrlWindow>, settings
     left_window.top = hp!(margin_vertical_perc);
     left_window.height = hp!(1.0 - 2.0 * margin_vertical_perc);
 
-    
     // UPPER WINDOW
 
     top_window.left = wp!(0.5 + margin_horizontal_perc * 0.5);
@@ -127,18 +116,14 @@ pub fn layout_3_windows(windows: &mut Vec<wmctrl_window::WmctrlWindow>, settings
     top_window.top = hp!(margin_vertical_perc);
     top_window.height = hp!(0.5 - margin_vertical_perc * 1.5);
 
-
     // BOTTOM WINDOW
- 
     bottom_window.left = wp!(0.5 + margin_horizontal_perc * 0.5);
     bottom_window.width = wp!(0.5 - margin_horizontal_perc * 1.5);
 
     bottom_window.top = hp!(0.5 + margin_vertical_perc * 0.5);
     bottom_window.height = hp!(0.5 - margin_vertical_perc * 1.5);
 
-
     left_window.apply_position();
     top_window.apply_position();
     bottom_window.apply_position();
-
 }
